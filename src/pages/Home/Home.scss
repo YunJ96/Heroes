@@ -1,0 +1,18 @@
+body {
+  height: 1080px;
+  background: url('https://lwi.nexon.com/heroes/home/wallpaper/2023/231214_AA1ABFC0201D7A39/wp_129.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+body:before {
+  content: '';
+  background: linear-gradient(to top, black, transparent);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  z-index: -1;
+}

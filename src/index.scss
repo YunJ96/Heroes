@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: 'sans-serif';
+}
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button {
+  width: 70px;
+  height: 70px;
+  background-color: #ae0116;
+  font-size: 25px;
+  color: white;
+  border: 0;
+}
+
+button:hover {
+  background-color: #d10018;
+  color: white;
+  cursor: pointer;
+}
