@@ -1,10 +1,11 @@
+import UserInfo from '../components/userInfo';
+
 export default function SearchUser() {
   return (
-    <section className='flex justify-center items-center h-96'>
-      <div>
-        <input type='text' placeholder='유저명을 입력해주세요.' />
-        <div>정보 들어갈 곳</div>
+    <article className='user-info-container flex justify-center items-center h-96 '>
+      <div className='basis-96'>
+        <UserInfo />
       </div>
-    </section>
+    </article>
   );
 }
