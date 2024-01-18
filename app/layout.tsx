@@ -3,7 +3,7 @@ import './globals.css';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: '마비노기 영웅전 검색',
+  title: 'Hero Insight',
   description: '마비노기 영웅전 유저 정보 검색 웹',
 };
 

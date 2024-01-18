@@ -2,13 +2,13 @@ import UserInfo from '../components/userInfo';
 
 export default function ComparisonSearch() {
   return (
-    <article className='user-info-container'>
+    <article>
       <div className='flex flex-row justify-center items-center'>
-        <div className='basis-96 m-4'>
+        <div style={{ marginRight: '50px' }} className='user-info-container'>
           <UserInfo />
         </div>
 
-        <div className='basis-96 '>
+        <div className='user-info-container'>
           <UserInfo />
         </div>
       </div>
