@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Hero Insight',
@@ -14,29 +15,41 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ko'>
-      <body className='bg-stone-900'>
+      <body className='bg-zinc-950'>
         <header className='mb-10'>
-          <nav className='flex flex-row space-x-10 w-3/5 mt-20 mx-auto text-white'>
-            <ul className='flex space-x-10'>
+          <nav className='flex flex-row space-x-10 w-3/5 my-20 mx-auto text-white text-2xl'>
+            <ul className='flex items-center space-x-10'>
               <li>
                 <h1>
-                  <Link href='/'>Hero Insight</Link>
+                  <Link href='/'>
+                    <Image
+                      src='/Hero Insight.png'
+                      alt='Hero Insight'
+                      width={100}
+                      height={1}
+                    />
+                  </Link>
                 </h1>
               </li>
               <li>
                 <Link href='/search'>유저 검색</Link>
               </li>
               <li>
-                <Link href='/comparisonSearch'>유저 비교</Link>
+                <Link href='/comparison'>유저 비교</Link>
               </li>
               <li>
                 <Link href='/board'>공략 게시판</Link>
+              </li>
+              <li className='text-rose-600'>
+                <a href='https://heroes.nexon.com/?skip=0' target='_blank'>
+                  마영전 바로가기
+                </a>
               </li>
             </ul>
           </nav>
         </header>
         {children}
-        <footer className='flex flex-col justify-center w-3/5 mx-auto text-sm text-slate-400 my-20'>
+        <footer className='w-3/5 mx-auto text-sm text-slate-400 my-20'>
           <p>- 마비노기 영웅전의 게임 데이터는 평균 10분 후 확인 가능합니다.</p>
           <p>
             - 2022년 1월 1일 이후 데이터를 조회할 수 있습니다. (단, 2022년 1월

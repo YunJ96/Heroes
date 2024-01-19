@@ -1,6 +1,6 @@
 import UserInfo from '../components/userInfo';
 
-export default function ComparisonSearch() {
+export default function Comparison() {
   return (
     <article>
       <div className='flex flex-row justify-center items-center'>

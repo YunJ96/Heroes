@@ -21,6 +21,10 @@ interface Status {
   stat_value: string;
 }
 
+interface Translation {
+  [key: string]: string;
+}
+
 export default function UserInfo() {
   const [user, setUser] = useState<string>('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
@@ -137,7 +141,7 @@ export default function UserInfo() {
     <section>
       <div className='flex flex-row mb-2'>
         <input
-          className='w-full rounded-l'
+          className='w-full rounded-l p-2 text-xl'
           type='text'
           placeholder='유저명을 입력해주세요.'
           onChange={(e) => setUser(e.target.value)}
@@ -153,60 +157,149 @@ export default function UserInfo() {
         </button>
       </div>
       {userInfo && (
-        <div className='bg-neutral-500 rounded text-zinc-950 font-bold p-3'>
-          <p>
+        <div className='bg-neutral-500 rounded text-zinc-950 p-3'>
+          <p className='font-bold text-lg'>
             <span className='mr-1'>{`${userInfo.character_name} (${userInfo.character_class_name})  Lv.${userInfo.character_level}`}</span>
           </p>
 
-          <p>타이틀 : {title}</p>
-          <p>문양 : {emblem}</p>
-          <p>길드 : {guild}</p>
           <p>
-            캐릭터 생성일 :{' '}
+            <span className='font-bold'>타이틀 :</span> {title}
+          </p>
+          <p>
+            <span className='font-bold'>문양 :</span> {emblem}
+          </p>
+          <p>
+            <span className='font-bold'>길드 :</span> {guild}
+          </p>
+          <p>
+            <span className='font-bold'>캐릭터 생성일 :</span>{' '}
             {userInfo.character_date_create === null
-              ? '정보 없음'
+              ? '먼 과거'
               : formatDate(userInfo.character_date_create)}
           </p>
-          <p>마지막 접속 : {formatDate(userInfo.character_date_last_logout)}</p>
-          <div className='flex flex-col mt-3'>
+          <p>
+            <span className='font-bold'>마지막 접속 :</span>{' '}
+            {formatDate(userInfo.character_date_last_logout)}
+          </p>
+          <div className='flex flex-col mt-3 text-lg'>
             <div>
               <ul
                 style={{
                   listStyle: 'none',
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '10px',
+                  gap: '5px',
                 }}
               >
                 {status &&
                   status.map((status: Status, index) => {
+                    const statusTranslation: Translation = {
+                      ATK: '공격력',
+                      MATK: '마법공격력',
+                      DEF: '방어력',
+                      STR: '힘',
+                      DEX: '민첩',
+                      INT: '지능',
+                      WILL: '의지',
+                      LUCK: '행운',
+                      HP: '체력',
+                      STAMINA: '스테미너',
+                      ATK_Speed: '공격속도',
+                      ATK_Absolute: '추가피해',
+                      Critical: '크리티컬',
+                      CritFactor: '크리티컬 피해량',
+                      Res_Critical: '크리티컬 저항력',
+                      Balance: '밸런스',
+                      TOWN_SPEED: '마을 이동속도',
+                      SKILL_RANK_SUM: '스킬 랭크 총합',
+                      ATK_LimitOver: '공격력 제한 해제',
+                      Immunity: '대항력',
+                    };
+
+                    const translatedStat = statusTranslation[status.stat_id];
+
                     if (
                       status.stat_id !== 'HEAVY_LOAD' &&
                       status.stat_id !== 'MEDIUM_LOAD'
                     )
                       return (
                         <li key={index}>
-                          {`${status.stat_id} : ${status.stat_value}`}
+                          <span className='font-bold'>{translatedStat} : </span>
+                          {status.stat_value}
                         </li>
                       );
                   })}
               </ul>
             </div>
-            <div className='text-sm mt-3'>
+            <div className='text-base mt-3'>
               <ul
                 style={{
                   listStyle: 'none',
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '10px',
+                  gap: '5px',
                 }}
               >
                 {equipment &&
                   equipment.map((equipment: Equipment) => {
+                    const statusTranslation: Translation = {
+                      'Right Hand': '무기',
+                      'Left Hand': '보조장비',
+                      Head: '머리',
+                      Upper: '가슴',
+                      Lower: '다리',
+                      Hand: '손',
+                      Leg: '발',
+                      Rhod: '로드',
+                      'Right Finger': '반지',
+                      'Left Finger': '반지',
+                      Earring: '귀걸이',
+                      Belt: '벨트',
+                      Charm: '장신구',
+                      Artifact: '아티팩트',
+                      'Right Wrist': '팔찌',
+                      'Left Wrist': '팔찌',
+                      Necklace: '목걸이',
+                      Hair: '헤어',
+                      FacePainting: '페이스페인트',
+                      BodyPainting: '바디페인트',
+                      MakeUp: '메이크업',
+                      'Inner Armor': '이너아머',
+                      Badge: '뱃지',
+                      'Right Epaulet': '견장',
+                      'Left Epaulet': '견장',
+                      Lens: '렌즈',
+                      'Body Shape': '체형',
+                      Avatar_Helm: '머리 아바타',
+                      Avatar_Tunic: '가슴 아바타',
+                      Avatar_Pants: '다리 아바타',
+                      Avatar_Gloves: '손 아바타',
+                      Avatar_Boots: '발 아바타',
+                      SubWeapon: '보조무기',
+                      Avatar_Rear: '등 아바타(날개)',
+                      Avatar_Weapon: '무기 아바타',
+                      Avatar_Tail: '꼬리 아바타',
+                    };
+
+                    const translatedAvatar =
+                      statusTranslation[equipment.item_equipment_slot_name];
+
+                    const item = {
+                      밀레시안: 'text-yellow-500',
+                      아르드리: 'text-red-600',
+                      오르나: 'text-fuchsia-600',
+                    };
+
+                    const matchingKey = Object.keys(item).find((key) =>
+                      equipment.item_name.includes(key)
+                    ) as keyof typeof item;
+                    const className =
+                      matchingKey !== undefined ? item[matchingKey] : '';
+
                     return (
                       <li>
-                        {equipment.item_equipment_slot_name} :{' '}
-                        {equipment.item_name}
+                        <span className='font-bold'>{translatedAvatar} :</span>{' '}
+                        <span className={className}>{equipment.item_name}</span>{' '}
                       </li>
                     );
                   })}
