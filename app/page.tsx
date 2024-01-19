@@ -22,8 +22,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='flex justify-center item-center'>
-      <div className='bg-zinc-950'>
+    <main className='flex justify-center item-center bg-stone-900 h-lvh'>
+      <div className='overflow-hidden h-10/12'>
         <img
           id='mainImg'
           src={mainImg[imageIndex]}

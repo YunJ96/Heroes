@@ -116,7 +116,7 @@ export default function UserInfo() {
         const emblemBase = titleData[1].title_name.split(': ');
         setEmblem(emblemBase[1]);
       }
-      console.log(equipmentResponse.data.item_equipment);
+
       setEquipmentUrl(equipmentResponse.data.item_equipment);
       setStatus(statusResponse.data.stat);
       setGuild(guildResponse.data.guild_name);
@@ -141,13 +141,20 @@ export default function UserInfo() {
     <section>
       <div className='flex flex-row mb-2'>
         <input
-          className='w-full rounded-l p-2 text-xl'
+          className='w-full rounded-l p-3 text-2xl focus:outline-none'
           type='text'
           placeholder='유저명을 입력해주세요.'
           onChange={(e) => setUser(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              setIsLoading(true);
+              handleUserSearchBtn();
+            }
+          }}
         />
         <button
-          className='bg-red-600 text-white w-20 rounded-r'
+          className='bg-red-600 text-white w-20 rounded-r text-xl'
           onClick={() => {
             setIsLoading(true);
             handleUserSearchBtn();
@@ -241,7 +248,7 @@ export default function UserInfo() {
                 }}
               >
                 {equipment &&
-                  equipment.map((equipment: Equipment) => {
+                  equipment.map((equipment: Equipment, index) => {
                     const statusTranslation: Translation = {
                       'Right Hand': '무기',
                       'Left Hand': '보조장비',
@@ -297,7 +304,7 @@ export default function UserInfo() {
                       matchingKey !== undefined ? item[matchingKey] : '';
 
                     return (
-                      <li>
+                      <li key={index}>
                         <span className='font-bold'>{translatedAvatar} :</span>{' '}
                         <span className={className}>{equipment.item_name}</span>{' '}
                       </li>

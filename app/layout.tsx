@@ -15,9 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ko'>
-      <body className='bg-zinc-950'>
-        <header className='mb-10'>
-          <nav className='flex flex-row space-x-10 w-3/5 my-20 mx-auto text-white text-2xl'>
+      <body>
+        <header className='flex bg-stone-900 h-44'>
+          <nav className='flex flex-row bg-stone-900 w-full h-32 space-x-10 text-white text-3xl fixed left-40'>
             <ul className='flex items-center space-x-10'>
               <li>
                 <h1>
@@ -31,16 +31,16 @@ export default function RootLayout({
                   </Link>
                 </h1>
               </li>
-              <li>
+              <li className='nav_list'>
                 <Link href='/search'>유저 검색</Link>
               </li>
-              <li>
+              <li className='nav_list'>
                 <Link href='/comparison'>유저 비교</Link>
               </li>
-              <li>
-                <Link href='/board'>공략 게시판</Link>
+              <li className='nav_list'>
+                <Link href='/board'>게시판</Link>
               </li>
-              <li className='text-rose-600'>
+              <li className='nav_last_list text-rose-600'>
                 <a href='https://heroes.nexon.com/?skip=0' target='_blank'>
                   마영전 바로가기
                 </a>
@@ -49,7 +49,7 @@ export default function RootLayout({
           </nav>
         </header>
         {children}
-        <footer className='w-3/5 mx-auto text-sm text-slate-400 my-20'>
+        <footer className='bg-stone-950 h-44 flex flex-col justify-center text-center mx-auto text-sm text-slate-400'>
           <p>- 마비노기 영웅전의 게임 데이터는 평균 10분 후 확인 가능합니다.</p>
           <p>
             - 2022년 1월 1일 이후 데이터를 조회할 수 있습니다. (단, 2022년 1월

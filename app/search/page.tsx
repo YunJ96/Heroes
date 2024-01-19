@@ -3,8 +3,8 @@ import UserInfo from '../components/userInfo';
 export default function SearchUser() {
   return (
     <article
-      style={{ height: '1000px' }}
-      className='flex justify-center items-center h-96 '
+      style={{ height: '1080px' }}
+      className='flex justify-center bg-stone-900 h-lvh'
     >
       <div className='user-info-container'>
         <UserInfo />
