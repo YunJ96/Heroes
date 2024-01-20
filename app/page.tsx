@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='flex justify-center item-center bg-stone-900 h-lvh'>
+    <main className='flex justify-center item-center bg-stone-900'>
       <div className='overflow-hidden h-10/12'>
         <img
           id='mainImg'

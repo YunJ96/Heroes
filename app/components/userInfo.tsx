@@ -25,7 +25,7 @@ interface Translation {
   [key: string]: string;
 }
 
-export default function UserInfo() {
+export default function UserInfo({ onChangeStatus, compareUser }: any) {
   const [user, setUser] = useState<string>('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [title, setTitle] = useState<[] | string | null>(null);
@@ -119,6 +119,7 @@ export default function UserInfo() {
 
       setEquipmentUrl(equipmentResponse.data.item_equipment);
       setStatus(statusResponse.data.stat);
+      onChangeStatus(statusResponse.data.stat);
       setGuild(guildResponse.data.guild_name);
       setIsLoading(false);
     } catch (error) {
@@ -135,6 +136,33 @@ export default function UserInfo() {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  const characterImg: Record<string, string> = {
+    리시타: '1',
+    피오나: '2',
+    이비: '3',
+    카록: '4',
+    카이: '5',
+    벨라: '6',
+    허크: '7',
+    린: '8',
+    아리샤: '9',
+    헤기: '10',
+    델리아: '11',
+    미리: '12',
+    그림덴: '13',
+    미울: '14',
+    벨: '15',
+    레서: '16',
+    카엘: '17',
+    테사: '18',
+    단아: '19',
+    레티: '20',
+    라티야: '21',
+    체른: '22',
+    아켈: '23',
+    소우: '24',
   };
 
   return (
@@ -164,30 +192,43 @@ export default function UserInfo() {
         </button>
       </div>
       {userInfo && (
-        <div className='bg-neutral-500 rounded text-zinc-950 p-3'>
-          <p className='font-bold text-lg'>
-            <span className='mr-1'>{`${userInfo.character_name} (${userInfo.character_class_name})  Lv.${userInfo.character_level}`}</span>
-          </p>
+        <div className='bg-neutral-500 rounded text-zinc-950 p-5'>
+          <div className='flex'>
+            <div>
+              <img
+                className='w-40'
+                src={`https://lwi.nexon.com/heroes/renewal/info/char_list_${
+                  characterImg[userInfo.character_class_name]
+                }.png`}
+                alt={userInfo.character_class_name}
+              />
+            </div>
 
-          <p>
-            <span className='font-bold'>타이틀 :</span> {title}
-          </p>
-          <p>
-            <span className='font-bold'>문양 :</span> {emblem}
-          </p>
-          <p>
-            <span className='font-bold'>길드 :</span> {guild}
-          </p>
-          <p>
-            <span className='font-bold'>캐릭터 생성일 :</span>{' '}
-            {userInfo.character_date_create === null
-              ? '먼 과거'
-              : formatDate(userInfo.character_date_create)}
-          </p>
-          <p>
-            <span className='font-bold'>마지막 접속 :</span>{' '}
-            {formatDate(userInfo.character_date_last_logout)}
-          </p>
+            <div>
+              <p className='font-bold text-lg ml-4 mb-4'>
+                <span className='mr-1'>{`${userInfo.character_name} (${userInfo.character_class_name})  Lv.${userInfo.character_level}`}</span>
+              </p>
+              <p className='ml-4 mb-2'>
+                <span className='font-bold'>타이틀 :</span> {title}
+              </p>
+              <p className='ml-4 mb-2'>
+                <span className='font-bold'>문양 :</span> {emblem}
+              </p>
+              <p className='ml-4 mb-2'>
+                <span className='font-bold'>길드 :</span> {guild}
+              </p>
+              <p className='ml-4 mb-2'>
+                <span className='font-bold'>캐릭터 생성일 :</span>{' '}
+                {userInfo.character_date_create === null
+                  ? '먼 과거'
+                  : formatDate(userInfo.character_date_create)}
+              </p>
+              <p className='ml-4 mb-4'>
+                <span className='font-bold'>마지막 접속 :</span>{' '}
+                {formatDate(userInfo.character_date_last_logout)}
+              </p>
+            </div>
+          </div>
           <div className='flex flex-col mt-3 text-lg'>
             <div>
               <ul
@@ -195,7 +236,7 @@ export default function UserInfo() {
                   listStyle: 'none',
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '5px',
+                  gap: '2px',
                 }}
               >
                 {status &&
@@ -232,7 +273,33 @@ export default function UserInfo() {
                       return (
                         <li key={index}>
                           <span className='font-bold'>{translatedStat} : </span>
-                          {status.stat_value}
+                          {status.stat_value}{' '}
+                          {compareUser &&
+                            Number(status.stat_value) -
+                              Number(compareUser[index].stat_value) !==
+                              0 && (
+                              <span
+                                className={
+                                  Number(status.stat_value) -
+                                    Number(compareUser[index].stat_value) >
+                                  0
+                                    ? 'text-rose-600'
+                                    : 'text-blue-700'
+                                }
+                              >
+                                {Number(status.stat_value) -
+                                  Number(compareUser[index].stat_value) >
+                                0
+                                  ? `(+${
+                                      Number(status.stat_value) -
+                                      Number(compareUser[index].stat_value)
+                                    })`
+                                  : `(${
+                                      Number(status.stat_value) -
+                                      Number(compareUser[index].stat_value)
+                                    })`}
+                              </span>
+                            )}
                         </li>
                       );
                   })}
@@ -297,9 +364,14 @@ export default function UserInfo() {
                       오르나: 'text-fuchsia-600',
                     };
 
-                    const matchingKey = Object.keys(item).find((key) =>
-                      equipment.item_name.includes(key)
+                    const matchingKey = Object.keys(item).find(
+                      (key) =>
+                        equipment &&
+                        equipment.item_name &&
+                        typeof equipment.item_name === 'string' &&
+                        equipment.item_name.includes(key)
                     ) as keyof typeof item;
+
                     const className =
                       matchingKey !== undefined ? item[matchingKey] : '';
 

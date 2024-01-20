@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Hero Insight',
-  description: '마비노기 영웅전 유저 정보 검색 웹',
+  description: '마비노기 영웅전 유저 정보 검색',
 };
 
 export default function RootLayout({
@@ -16,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body>
-        <header className='flex bg-stone-900 h-44'>
-          <nav className='flex flex-row bg-stone-900 w-full h-32 space-x-10 text-white text-3xl fixed left-40'>
-            <ul className='flex items-center space-x-10'>
+        <header className='flex bg-stone-900 h-36'>
+          <nav className='flex flex-row bg-stone-900 w-full h-32 space-x-10 text-white text-3xl fixed'>
+            <ul className='flex items-center space-x-10 ml-40'>
               <li>
                 <h1>
                   <Link href='/'>
@@ -56,7 +56,7 @@ export default function RootLayout({
             이전에 발생한 데이터는 응답 결과에 포함되지 않을 수 있음)
           </p>
           <p>- Data based on NEXON Open API</p>
-          <p>- Image based on NEXON Heroes Wallpaper</p>
+          <p>- Image based on NEXON Heroes</p>
         </footer>
       </body>
     </html>
