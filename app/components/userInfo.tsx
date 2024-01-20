@@ -16,22 +16,28 @@ interface Equipment {
   item_name: string;
 }
 
-interface Status {
-  stat_id: string;
-  stat_value: string;
+export interface Status {
+  stat_id: string | null;
+  stat_value: string | null;
 }
 
 interface Translation {
   [key: string]: string;
 }
 
-export default function UserInfo({ onChangeStatus, compareUser }: any) {
+export default function UserInfo({
+  onChangeStatus,
+  compareUser,
+}: {
+  onChangeStatus: any;
+  compareUser: Status[] | null;
+}) {
   const [user, setUser] = useState<string>('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [title, setTitle] = useState<[] | string | null>(null);
   const [emblem, setEmblem] = useState(null);
-  const [equipment, setEquipmentUrl] = useState<[] | null>(null);
-  const [status, setStatus] = useState<[] | null>(null);
+  const [equipment, setEquipmentUrl] = useState<Equipment[] | null>(null);
+  const [status, setStatus] = useState<Status[] | null>(null);
   const [guild, setGuild] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -122,8 +128,12 @@ export default function UserInfo({ onChangeStatus, compareUser }: any) {
       onChangeStatus(statusResponse.data.stat);
       setGuild(guildResponse.data.guild_name);
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        alert('유저 정보가 없습니다.');
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -264,7 +274,9 @@ export default function UserInfo({ onChangeStatus, compareUser }: any) {
                       Immunity: '대항력',
                     };
 
-                    const translatedStat = statusTranslation[status.stat_id];
+                    const translatedStat =
+                      status.stat_id !== null &&
+                      statusTranslation[status.stat_id];
 
                     if (
                       status.stat_id !== 'HEAVY_LOAD' &&

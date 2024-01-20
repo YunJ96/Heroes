@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import NoticeComponent from './components/noticeComponent';
 
 export default function Home() {
   const mainImg = [
@@ -13,6 +14,7 @@ export default function Home() {
   ];
 
   const [imageIndex, setImageIndex] = useState(0);
+  const [modalVisible, setModalVisible] = useState(true);
 
   useEffect(() => {
     const imageChange = setInterval(() => {
@@ -21,8 +23,24 @@ export default function Home() {
     return () => clearInterval(imageChange);
   }, []);
 
+  const handleCloseBtn = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <main className='flex justify-center item-center bg-stone-900'>
+    <main className='flex bg-stone-900'>
+      {modalVisible && (
+        <div className='flex flex-col p-2 fixed bg-neutral-500 z-20 top-40 left-20 border-solid border-black border-2'>
+          <NoticeComponent />
+          <button
+            className='ml-auto border-solid border-black border-2 w-20'
+            onClick={handleCloseBtn}
+          >
+            닫기
+          </button>
+        </div>
+      )}
+
       <div className='overflow-hidden h-10/12'>
         <img
           id='mainImg'

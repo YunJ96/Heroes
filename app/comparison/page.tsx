@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import UserInfo from '../components/userInfo';
+import UserInfo, { Status } from '../components/userInfo';
 
 export default function Comparison() {
-  const [firstUser, setFirstUser] = useState(null);
-  const [secondUser, setSecondUser] = useState(null);
+  const [firstUser, setFirstUser] = useState<Status[] | null>(null);
+  const [secondUser, setSecondUser] = useState<Status[] | null>(null);
 
-  const handleChangeStatus = (userData: any, userNumber: number) => {
+  const handleChangeStatus = (userData: Status[], userNumber: number) => {
     if (userNumber === 1) {
       setFirstUser(userData);
     } else if (userNumber === 2) {
