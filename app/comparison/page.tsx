@@ -15,8 +15,30 @@ export default function Comparison() {
     }
   };
 
+  const backGroundImg = [
+    'https://image.heroes.nexon.com/imghome/gallery/wp61_1920x1200.jpg',
+    'https://image.heroes.nexon.com/imghome/gallery/wp60_1920x1200.jpg',
+    'https://image.heroes.nexon.com/imghome/gallery/wp70_1920x1200.jpg',
+    'https://image.heroes.nexon.com/imghome/gallery/wp64_1920x1200.jpg',
+    'https://image.heroes.nexon.com/imghome/gallery/wp63_1920x1200.jpg',
+    'https://image.heroes.nexon.com/imghome/gallery/wp62_1920x1200.jpg',
+    'https://ssl.nexon.com/s2/game/heroes/web/2017/wallpaper/2018/0712_vi1hwsj3/wp_093.jpg',
+  ];
+
+  const randomNumber = Math.floor(Math.random() * 6);
+
   return (
-    <article className='bg-stone-900' style={{ height: '1300px' }}>
+    <article
+      className='bg-stone-900'
+      style={{
+        height: '1200px',
+        backgroundColor: 'rgb(28 25 23)',
+        backgroundImage: `url(${backGroundImg[randomNumber]})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+      }}
+    >
       <div className='flex flex-row justify-center items-center'>
         <div style={{ marginRight: '50px' }} className='user-info-container'>
           <UserInfo

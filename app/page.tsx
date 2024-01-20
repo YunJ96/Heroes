@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <main className='flex bg-stone-900'>
       {modalVisible && (
-        <div className='flex flex-col p-2 fixed bg-neutral-500 z-20 top-40 left-20 border-solid border-black border-2'>
+        <div className='flex flex-col p-2 rounded fixed bg-neutral-400 z-20 top-40 left-20 border-solid border-black border-2'>
           <NoticeComponent />
           <button
             className='ml-auto border-solid border-black border-2 w-20'

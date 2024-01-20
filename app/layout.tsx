@@ -25,7 +25,7 @@ export default function RootLayout({
                     <Image
                       src='/Hero Insight.png'
                       alt='Hero Insight'
-                      width={100}
+                      width={120}
                       height={1}
                     />
                   </Link>

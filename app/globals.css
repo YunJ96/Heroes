@@ -78,3 +78,18 @@
   background-color: rgb(115 115 115);
   border: solid 1px rgb(39 39 42);
 }
+
+#spinner {
+  margin: calc(50% - 25px) auto;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  border-top-color: white;
+  border-radius: 100%;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -34,8 +34,8 @@ export default function UserInfo({
 }) {
   const [user, setUser] = useState<string>('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const [title, setTitle] = useState<[] | string | null>(null);
-  const [emblem, setEmblem] = useState(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [emblem, setEmblem] = useState<string | null>(null);
   const [equipment, setEquipmentUrl] = useState<Equipment[] | null>(null);
   const [status, setStatus] = useState<Status[] | null>(null);
   const [guild, setGuild] = useState<string | null>(null);
@@ -125,15 +125,19 @@ export default function UserInfo({
 
       setEquipmentUrl(equipmentResponse.data.item_equipment);
       setStatus(statusResponse.data.stat);
-      onChangeStatus(statusResponse.data.stat);
       setGuild(guildResponse.data.guild_name);
-      setIsLoading(false);
+
+      if (typeof onChangeStatus === 'function') {
+        onChangeStatus(statusResponse.data.stat);
+      }
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
         alert('유저 정보가 없습니다.');
       } else {
         console.log(error);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -176,7 +180,7 @@ export default function UserInfo({
   };
 
   return (
-    <section>
+    <section className='mt-10'>
       <div className='flex flex-row mb-2'>
         <input
           className='w-full rounded-l p-3 text-2xl focus:outline-none'
@@ -198,206 +202,223 @@ export default function UserInfo({
             handleUserSearchBtn();
           }}
         >
-          검색
+          {isLoading ? (
+            <div id='spinner' style={{ width: '20px', height: '20px' }}></div>
+          ) : (
+            '검색'
+          )}
         </button>
       </div>
-      {userInfo && (
-        <div className='bg-neutral-500 rounded text-zinc-950 p-5'>
-          <div className='flex'>
-            <div>
-              <img
-                className='w-40'
-                src={`https://lwi.nexon.com/heroes/renewal/info/char_list_${
-                  characterImg[userInfo.character_class_name]
-                }.png`}
-                alt={userInfo.character_class_name}
-              />
+      {isLoading ? (
+        <div id='spinner' style={{ width: '80px', height: '80px' }}></div>
+      ) : (
+        userInfo && (
+          <div className='bg-neutral-400 rounded text-zinc-950 p-5'>
+            <div className='flex'>
+              <div>
+                <img
+                  className='w-40'
+                  src={`https://lwi.nexon.com/heroes/renewal/info/char_list_${
+                    characterImg[userInfo.character_class_name]
+                  }.png`}
+                  alt={userInfo.character_class_name}
+                />
+              </div>
+
+              <div>
+                <p className='font-bold text-lg ml-4 mb-4'>
+                  <span className='mr-1'>{`${userInfo.character_name} (${userInfo.character_class_name})  Lv.${userInfo.character_level}`}</span>
+                </p>
+                <p className='ml-4 mb-2'>
+                  <span className='font-bold'>타이틀 :</span> {title}
+                </p>
+                <p className='ml-4 mb-2'>
+                  <span className='font-bold'>문양 :</span> {emblem}
+                </p>
+                <p className='ml-4 mb-2'>
+                  <span className='font-bold'>길드 :</span> {guild}
+                </p>
+                <p className='ml-4 mb-2'>
+                  <span className='font-bold'>캐릭터 생성일 :</span>{' '}
+                  {userInfo.character_date_create === null
+                    ? '먼 과거'
+                    : formatDate(userInfo.character_date_create)}
+                </p>
+                <p className='ml-4 mb-4'>
+                  <span className='font-bold'>마지막 접속 :</span>{' '}
+                  {formatDate(userInfo.character_date_last_logout)}
+                </p>
+              </div>
             </div>
+            <div className='flex flex-col mt-3 text-lg'>
+              <div>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '2px',
+                  }}
+                >
+                  {status &&
+                    status.map((status: Status, index) => {
+                      const statusTranslation: Translation = {
+                        ATK: '공격력',
+                        MATK: '마법공격력',
+                        DEF: '방어력',
+                        STR: '힘',
+                        DEX: '민첩',
+                        INT: '지능',
+                        WILL: '의지',
+                        LUCK: '행운',
+                        HP: '체력',
+                        STAMINA: '스테미너',
+                        ATK_Speed: '공격속도',
+                        ATK_Absolute: '추가피해',
+                        Critical: '크리티컬',
+                        CritFactor: '크리티컬 피해량',
+                        Res_Critical: '크리티컬 저항력',
+                        Balance: '밸런스',
+                        TOWN_SPEED: '마을 이동속도',
+                        SKILL_RANK_SUM: '스킬 랭크 총합',
+                        ATK_LimitOver: '공격력 제한 해제',
+                        Immunity: '대항력',
+                      };
 
-            <div>
-              <p className='font-bold text-lg ml-4 mb-4'>
-                <span className='mr-1'>{`${userInfo.character_name} (${userInfo.character_class_name})  Lv.${userInfo.character_level}`}</span>
-              </p>
-              <p className='ml-4 mb-2'>
-                <span className='font-bold'>타이틀 :</span> {title}
-              </p>
-              <p className='ml-4 mb-2'>
-                <span className='font-bold'>문양 :</span> {emblem}
-              </p>
-              <p className='ml-4 mb-2'>
-                <span className='font-bold'>길드 :</span> {guild}
-              </p>
-              <p className='ml-4 mb-2'>
-                <span className='font-bold'>캐릭터 생성일 :</span>{' '}
-                {userInfo.character_date_create === null
-                  ? '먼 과거'
-                  : formatDate(userInfo.character_date_create)}
-              </p>
-              <p className='ml-4 mb-4'>
-                <span className='font-bold'>마지막 접속 :</span>{' '}
-                {formatDate(userInfo.character_date_last_logout)}
-              </p>
-            </div>
-          </div>
-          <div className='flex flex-col mt-3 text-lg'>
-            <div>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '2px',
-                }}
-              >
-                {status &&
-                  status.map((status: Status, index) => {
-                    const statusTranslation: Translation = {
-                      ATK: '공격력',
-                      MATK: '마법공격력',
-                      DEF: '방어력',
-                      STR: '힘',
-                      DEX: '민첩',
-                      INT: '지능',
-                      WILL: '의지',
-                      LUCK: '행운',
-                      HP: '체력',
-                      STAMINA: '스테미너',
-                      ATK_Speed: '공격속도',
-                      ATK_Absolute: '추가피해',
-                      Critical: '크리티컬',
-                      CritFactor: '크리티컬 피해량',
-                      Res_Critical: '크리티컬 저항력',
-                      Balance: '밸런스',
-                      TOWN_SPEED: '마을 이동속도',
-                      SKILL_RANK_SUM: '스킬 랭크 총합',
-                      ATK_LimitOver: '공격력 제한 해제',
-                      Immunity: '대항력',
-                    };
+                      const translatedStat =
+                        status.stat_id !== null &&
+                        statusTranslation[status.stat_id];
 
-                    const translatedStat =
-                      status.stat_id !== null &&
-                      statusTranslation[status.stat_id];
-
-                    if (
-                      status.stat_id !== 'HEAVY_LOAD' &&
-                      status.stat_id !== 'MEDIUM_LOAD'
-                    )
-                      return (
-                        <li key={index}>
-                          <span className='font-bold'>{translatedStat} : </span>
-                          {status.stat_value}{' '}
-                          {compareUser &&
-                            Number(status.stat_value) -
-                              Number(compareUser[index].stat_value) !==
-                              0 && (
-                              <span
-                                className={
-                                  Number(status.stat_value) -
+                      if (
+                        status.stat_id !== 'HEAVY_LOAD' &&
+                        status.stat_id !== 'MEDIUM_LOAD'
+                      )
+                        return (
+                          <li key={index}>
+                            <span className='font-bold'>
+                              {translatedStat} :{' '}
+                            </span>
+                            {status.stat_value}{' '}
+                            {compareUser &&
+                              Array.isArray(compareUser) &&
+                              compareUser.length > index &&
+                              compareUser[index].stat_value !== undefined &&
+                              Number(status.stat_value) -
+                                Number(compareUser[index].stat_value) !==
+                                0 && (
+                                <span
+                                  className={
+                                    Number(status.stat_value) -
+                                      Number(compareUser[index].stat_value) >
+                                    0
+                                      ? 'text-rose-600'
+                                      : 'text-blue-700'
+                                  }
+                                >
+                                  {Number(status.stat_value) -
                                     Number(compareUser[index].stat_value) >
                                   0
-                                    ? 'text-rose-600'
-                                    : 'text-blue-700'
-                                }
-                              >
-                                {Number(status.stat_value) -
-                                  Number(compareUser[index].stat_value) >
-                                0
-                                  ? `(+${
-                                      Number(status.stat_value) -
-                                      Number(compareUser[index].stat_value)
-                                    })`
-                                  : `(${
-                                      Number(status.stat_value) -
-                                      Number(compareUser[index].stat_value)
-                                    })`}
-                              </span>
-                            )}
+                                    ? `(+${
+                                        Number(status.stat_value) -
+                                        Number(compareUser[index].stat_value)
+                                      })`
+                                    : `(${
+                                        Number(status.stat_value) -
+                                        Number(compareUser[index].stat_value)
+                                      })`}
+                                </span>
+                              )}
+                          </li>
+                        );
+                    })}
+                </ul>
+              </div>
+              <div className='text-base mt-3'>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: '5px',
+                  }}
+                >
+                  {equipment &&
+                    equipment.map((equipment: Equipment, index) => {
+                      const statusTranslation: Translation = {
+                        'Right Hand': '무기',
+                        'Left Hand': '보조장비',
+                        Head: '머리',
+                        Upper: '가슴',
+                        Lower: '다리',
+                        Hand: '손',
+                        Leg: '발',
+                        Rhod: '로드',
+                        'Right Finger': '반지',
+                        'Left Finger': '반지',
+                        Earring: '귀걸이',
+                        Belt: '벨트',
+                        Charm: '장신구',
+                        Artifact: '아티팩트',
+                        'Right Wrist': '팔찌',
+                        'Left Wrist': '팔찌',
+                        Necklace: '목걸이',
+                        Hair: '헤어',
+                        FacePainting: '페이스페인트',
+                        BodyPainting: '바디페인트',
+                        MakeUp: '메이크업',
+                        'Inner Armor': '이너아머',
+                        Badge: '뱃지',
+                        'Right Epaulet': '견장',
+                        'Left Epaulet': '견장',
+                        Lens: '렌즈',
+                        'Body Shape': '체형',
+                        Avatar_Helm: '머리 아바타',
+                        Avatar_Tunic: '가슴 아바타',
+                        Avatar_Pants: '다리 아바타',
+                        Avatar_Gloves: '손 아바타',
+                        Avatar_Boots: '발 아바타',
+                        SubWeapon: '보조무기',
+                        Avatar_Rear: '등 아바타(날개)',
+                        Avatar_Weapon: '무기 아바타',
+                        Avatar_Tail: '꼬리 아바타',
+                      };
+
+                      const translatedAvatar =
+                        statusTranslation[equipment.item_equipment_slot_name];
+
+                      const item = {
+                        밀레시안: 'text-yellow-500',
+                        아르드리: 'text-red-600',
+                        오르나: 'text-fuchsia-600',
+                      };
+
+                      const matchingKey = Object.keys(item).find(
+                        (key) =>
+                          equipment &&
+                          equipment.item_name &&
+                          typeof equipment.item_name === 'string' &&
+                          equipment.item_name.includes(key)
+                      ) as keyof typeof item;
+
+                      const className =
+                        matchingKey !== undefined ? item[matchingKey] : '';
+
+                      return (
+                        <li key={index}>
+                          <span className='font-bold'>
+                            {translatedAvatar} :
+                          </span>{' '}
+                          <span className={className}>
+                            {equipment.item_name}
+                          </span>{' '}
                         </li>
                       );
-                  })}
-              </ul>
-            </div>
-            <div className='text-base mt-3'>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '5px',
-                }}
-              >
-                {equipment &&
-                  equipment.map((equipment: Equipment, index) => {
-                    const statusTranslation: Translation = {
-                      'Right Hand': '무기',
-                      'Left Hand': '보조장비',
-                      Head: '머리',
-                      Upper: '가슴',
-                      Lower: '다리',
-                      Hand: '손',
-                      Leg: '발',
-                      Rhod: '로드',
-                      'Right Finger': '반지',
-                      'Left Finger': '반지',
-                      Earring: '귀걸이',
-                      Belt: '벨트',
-                      Charm: '장신구',
-                      Artifact: '아티팩트',
-                      'Right Wrist': '팔찌',
-                      'Left Wrist': '팔찌',
-                      Necklace: '목걸이',
-                      Hair: '헤어',
-                      FacePainting: '페이스페인트',
-                      BodyPainting: '바디페인트',
-                      MakeUp: '메이크업',
-                      'Inner Armor': '이너아머',
-                      Badge: '뱃지',
-                      'Right Epaulet': '견장',
-                      'Left Epaulet': '견장',
-                      Lens: '렌즈',
-                      'Body Shape': '체형',
-                      Avatar_Helm: '머리 아바타',
-                      Avatar_Tunic: '가슴 아바타',
-                      Avatar_Pants: '다리 아바타',
-                      Avatar_Gloves: '손 아바타',
-                      Avatar_Boots: '발 아바타',
-                      SubWeapon: '보조무기',
-                      Avatar_Rear: '등 아바타(날개)',
-                      Avatar_Weapon: '무기 아바타',
-                      Avatar_Tail: '꼬리 아바타',
-                    };
-
-                    const translatedAvatar =
-                      statusTranslation[equipment.item_equipment_slot_name];
-
-                    const item = {
-                      밀레시안: 'text-yellow-500',
-                      아르드리: 'text-red-600',
-                      오르나: 'text-fuchsia-600',
-                    };
-
-                    const matchingKey = Object.keys(item).find(
-                      (key) =>
-                        equipment &&
-                        equipment.item_name &&
-                        typeof equipment.item_name === 'string' &&
-                        equipment.item_name.includes(key)
-                    ) as keyof typeof item;
-
-                    const className =
-                      matchingKey !== undefined ? item[matchingKey] : '';
-
-                    return (
-                      <li key={index}>
-                        <span className='font-bold'>{translatedAvatar} :</span>{' '}
-                        <span className={className}>{equipment.item_name}</span>{' '}
-                      </li>
-                    );
-                  })}
-              </ul>
+                    })}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        )
       )}
     </section>
   );

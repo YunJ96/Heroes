@@ -6,14 +6,14 @@ import Link from 'next/link';
 export default function Board() {
   return (
     <article className='flex flex-col items-center bg-stone-900 h-lvh'>
-      <ul className='flex flex-col item-center bg-neutral-500 w-1/2 p-2 text-lg'>
-        <li className='bg-neutral-500 p-1'>
+      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg rounded'>
+        <li className='p-1'>
           <Link href={'/board/notice'}>공지 사항</Link>
         </li>
       </ul>
 
-      <ul className='flex flex-col item-center bg-neutral-500 w-1/2 p-2 text-lg mt-5'>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg mt-5 rounded'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=TpFh03rmdPw' target='_blank'>
             신규 / 복귀 유저 필독 영상!
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
@@ -48,50 +48,50 @@ export default function Board() {
         </li>
       </ul>
 
-      <ul className='flex flex-col item-center bg-neutral-500 w-1/2 p-2 text-lg mt-5'>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg mt-5 rounded'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=Q-BF9lzRVgY' target='_blank'>
             소우 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=_iH8J--nT2g' target='_blank'>
             아켈 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=xxWjGDL0810' target='_blank'>
             체른 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=ZQQ8qHxkQ4I' target='_blank'>
             테사 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=bvLIkwkOdiw' target='_blank'>
             델리아 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=o5GeZUOS5N4' target='_blank'>
             미울 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=dvorbize9XI' target='_blank'>
             레서 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
           </a>
         </li>
-        <li className='bg-neutral-500 border-bottom-solid p-1 border-b-2 border-zinc-800'>
+        <li className='border-bottom-solid p-1 border-b-2 border-zinc-800'>
           <a href='https://www.youtube.com/watch?v=wQO4rHFkewA' target='_blank'>
             테이드 허크 공략 및 사용법
             <span className='text-neutral-900 text-sm ml-2'>유튜브 링크</span>
