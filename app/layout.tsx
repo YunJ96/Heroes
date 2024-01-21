@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Hero Insight',
@@ -22,11 +21,10 @@ export default function RootLayout({
               <li>
                 <h1>
                   <Link href='/'>
-                    <Image
-                      src='/images/hero_insight.png'
+                    <img
+                      src='/hero_insight.png'
                       alt='Hero_Insight'
-                      width={150}
-                      height={30}
+                      style={{ width: '170px' }}
                     />
                   </Link>
                 </h1>

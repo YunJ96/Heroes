@@ -41,13 +41,16 @@ export default function Home() {
         </div>
       )}
 
-      <div className='overflow-hidden h-10/12'>
-        <img
-          id='mainImg'
-          src={mainImg[imageIndex]}
-          alt='마비노기 영웅전 월페이퍼'
-        />
-      </div>
+      <div
+        style={{
+          width: '100%',
+          height: '1080px',
+          backgroundImage: `url(${mainImg[imageIndex]})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'top',
+          backgroundSize: 'cover',
+        }}
+      ></div>
     </main>
   );
 }

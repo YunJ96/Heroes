@@ -31,7 +31,6 @@
 }
 
 #mainImg {
-  width: 100%;
   animation: slide 5s ease-in-out infinite;
 }
 
