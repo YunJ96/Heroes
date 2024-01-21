@@ -23,8 +23,8 @@ export default function RootLayout({
                 <h1>
                   <Link href='/'>
                     <Image
-                      src='/hero_insight.png'
-                      alt='HeroInsight'
+                      src='/images/hero_insight.png'
+                      alt='Hero_Insight'
                       width={150}
                       height={30}
                     />
