@@ -34,22 +34,24 @@ export default function Comparison() {
         height: '1200px',
         backgroundColor: 'rgb(28 25 23)',
         backgroundImage: `url(${backGroundImg[randomNumber]})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'top',
         backgroundSize: 'cover',
       }}
     >
       <div className='flex flex-row justify-center items-center'>
         <div style={{ marginRight: '50px' }} className='user-info-container'>
           <UserInfo
-            onChangeStatus={(userData: any) => handleChangeStatus(userData, 1)}
+            onChangeStatus={(userData: Status[]) =>
+              handleChangeStatus(userData, 1)
+            }
             compareUser={secondUser}
           />
         </div>
 
         <div className='user-info-container'>
           <UserInfo
-            onChangeStatus={(userData: any) => handleChangeStatus(userData, 2)}
+            onChangeStatus={(userData: Status[]) =>
+              handleChangeStatus(userData, 2)
+            }
             compareUser={firstUser}
           />
         </div>

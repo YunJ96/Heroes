@@ -46,8 +46,6 @@ export default function Home() {
           width: '100%',
           height: '1080px',
           backgroundImage: `url(${mainImg[imageIndex]})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top',
           backgroundSize: 'cover',
         }}
       ></div>

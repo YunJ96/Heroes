@@ -14,6 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ko'>
+      <head>
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7806472036562411'
+          crossOrigin='anonymous'
+        ></script>
+      </head>
       <body>
         <header className='flex bg-stone-900 h-36'>
           <nav className='flex flex-row bg-stone-900 w-full h-32 space-x-10 text-white text-3xl fixed'>
@@ -24,7 +31,7 @@ export default function RootLayout({
                     <img
                       src='/hero_insight.png'
                       alt='Hero_Insight'
-                      style={{ width: '170px' }}
+                      style={{ width: '180px' }}
                     />
                   </Link>
                 </h1>
