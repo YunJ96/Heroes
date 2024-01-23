@@ -32,6 +32,7 @@ export default function RootLayout({
                       src='/hero_insight.png'
                       alt='Hero_Insight'
                       style={{ width: '180px' }}
+                      loading='lazy'
                     />
                   </Link>
                 </h1>

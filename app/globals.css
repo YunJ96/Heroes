@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'BMJUA';
-  src: url('/fonts/BMJUA_ttf.ttf') format('truetype');
+  font-family: 'WarhavenB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/WarhavenB.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
 }
 
 :root {
@@ -27,7 +30,7 @@
   color: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: BMJUA, sans-serif;
+  font-family: WarhavenB, sans-serif;
 }
 
 #mainImg {

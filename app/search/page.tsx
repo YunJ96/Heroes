@@ -2,13 +2,13 @@ import UserInfo from '../components/userInfo';
 
 export default function SearchUser() {
   const backGroundImg = [
-    'https://image.heroes.nexon.com/imghome/gallery/wp61_1920x1200.jpg',
-    'https://image.heroes.nexon.com/imghome/gallery/wp60_1920x1200.jpg',
-    'https://image.heroes.nexon.com/imghome/gallery/wp70_1920x1200.jpg',
-    'https://image.heroes.nexon.com/imghome/gallery/wp64_1920x1200.jpg',
-    'https://image.heroes.nexon.com/imghome/gallery/wp63_1920x1200.jpg',
-    'https://image.heroes.nexon.com/imghome/gallery/wp62_1920x1200.jpg',
-    'https://ssl.nexon.com/s2/game/heroes/web/2017/wallpaper/2018/0712_vi1hwsj3/wp_093.jpg',
+    '/배경.webp',
+    '/뷔제.webp',
+    '/초섬.webp',
+    '/지그.webp',
+    '/엘쿨.webp',
+    '/배무.webp',
+    '/폭엘.webp',
   ];
 
   const randomNumber = Math.floor(Math.random() * 6);
@@ -19,7 +19,6 @@ export default function SearchUser() {
           height: '1200px',
           backgroundImage: `url(${backGroundImg[randomNumber]})`,
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top',
           backgroundSize: 'cover',
         }}
         className='flex justify-center h-lvh relative'

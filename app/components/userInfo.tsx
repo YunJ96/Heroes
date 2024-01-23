@@ -222,6 +222,7 @@ export default function UserInfo({
                     characterImg[userInfo.character_class_name]
                   }.png`}
                   alt={userInfo.character_class_name}
+                  loading='lazy'
                 />
               </div>
 

@@ -4,9 +4,29 @@
 import Link from 'next/link';
 
 export default function Board() {
+  const backGroundImg = [
+    '/배경.webp',
+    '/뷔제.webp',
+    '/초섬.webp',
+    '/지그.webp',
+    '/엘쿨.webp',
+    '/배무.webp',
+    '/폭엘.webp',
+  ];
+
+  const randomNumber = Math.floor(Math.random() * 6);
+
   return (
-    <article className='flex flex-col items-center bg-stone-900 h-lvh'>
-      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg rounded'>
+    <article
+      className='flex flex-col items-center bg-stone-900'
+      style={{
+        height: '1200px',
+        backgroundColor: 'rgb(28 25 23)',
+        backgroundImage: `url(${backGroundImg[randomNumber]})`,
+        backgroundSize: 'cover',
+      }}
+    >
+      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg rounded mt-24'>
         <li className='p-1'>
           <Link href={'/board/notice'}>공지 사항</Link>
         </li>
