@@ -5,7 +5,7 @@ export default function NoticeComponent() {
         공지사항
       </h2>
       <div className='p-1'>
-        안녕하세요. Hero Insight 웹 페이지 개발자입니다. <br />
+        안녕하세요. Hero Insight 개발자입니다. <br />
         현재 소우 캐릭터의 전용 무기인 오리엔탈 블레이드, 115제 반지 어둠 속
         그림자, <br />
         어둠 속 달빛, 견장, 체형, 그리고 장비의 인챈트, 강화 등의 정보는

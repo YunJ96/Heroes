@@ -2,6 +2,7 @@
 // import CharacterBoard from '../components/characterBoard';
 
 import Link from 'next/link';
+import SideNav from '../components/sideNav';
 
 export default function Board() {
   const backGroundImg = [
@@ -26,7 +27,8 @@ export default function Board() {
         backgroundSize: 'cover',
       }}
     >
-      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg rounded mt-24'>
+      <SideNav />
+      <ul className='flex flex-col item-center bg-neutral-400 w-1/2 p-2 text-lg rounded mt-8'>
         <li className='p-1'>
           <Link href={'/board/notice'}>공지 사항</Link>
         </li>

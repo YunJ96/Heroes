@@ -1,3 +1,5 @@
+'use client';
+
 import UserInfo from '../components/userInfo';
 
 export default function SearchUser() {
@@ -13,7 +15,7 @@ export default function SearchUser() {
 
   const randomNumber = Math.floor(Math.random() * 6);
   return (
-    <article className='relative overflow-hidden'>
+    <article>
       <div
         style={{
           height: '1200px',
@@ -21,7 +23,7 @@ export default function SearchUser() {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
         }}
-        className='flex justify-center h-lvh relative'
+        className='flex justify-center'
       >
         <div className='user-info-container'>
           <UserInfo onChangeStatus={undefined} compareUser={null} />
